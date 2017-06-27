@@ -41,30 +41,109 @@ public class AddressService extends Util implements AddressDao{
     }
 
     public List<Address> getAll() throws SQLException {
+
         List<Address> addressList = new ArrayList<Address>();
 
         String sql = "SELECT ID, COUNTRY, CITY, STREET, POST_CODE";
 
         Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
 
-        ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Address address = new Address();
+                address.setId(resultSet.getLong("ID"));
+                address.setCountry(resultSet.getString("COUNTRY"));
+                address.setCity(resultSet.getString("CITY"));
+                address.setStreet(resultSet.getString("STREET"));
+                address.setPostCode(resultSet.getString("POST_CODE"));
 
-        while (resultSet.next())
-        {
-
+                addressList.add(address);
+            }
         }
-        return null;
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }finally {
+            if (statement != null)
+                statement.close();
+            if (connection != null)
+                connection.close();
+        }
+        return addressList;
     }
 
-    public Address getById(Long id) {
-        return null;
+    public Address getById(Long id) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        String sql = "SELECT ID, COUNTRY, CITY, STREET, POST_CODE  FROM address WHERE ID=?";
+
+        Address address = new Address();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            address.setId(resultSet.getLong("ID"));
+            address.setCountry(resultSet.getString("COUNTRY"));
+            address.setCity(resultSet.getString("CITY"));
+            address.setStreet(resultSet.getString("STREET"));
+            address.setPostCode(resultSet.getString("POST_CODE"));
+
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if (preparedStatement != null)
+                preparedStatement.close();
+            if (connection != null)
+                connection.close();
+        }
+        return address;
     }
 
     public void update(Address address) {
+        PreparedStatement preparedStatement = null;
 
+        String sql = "UPDATE ADDRESS SET COUNTRY=?, CITY=?, STREET=?, POST_CODE=? WHERE id=?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, address.getCountry());
+            preparedStatement.setString(2, address.getCity());
+            preparedStatement.setString(3, address.getStreet());
+            preparedStatement.setString(4, address.getPostCode());
+            preparedStatement.setLong(5, address.getId());
+
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
-    public void remove(Address address) {
+    public void remove(Address address) throws SQLException {
+        PreparedStatement preparedStatement = null;
 
+        String sql = "DELETE FROM address WHERE ID=?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setLong(1, address.getId());
+
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            if (preparedStatement != null)
+                preparedStatement.close();
+            if (connection != null)
+                connection.close();
+        }
     }
 }

@@ -18,11 +18,11 @@ public interface AddressDao {
     List<Address> getAll() throws SQLException;
 
     //get Address from DB by ID
-    Address getById(Long id);
+    Address getById(Long id) throws SQLException;
 
     //update
     void update(Address address);
 
     //delete
-    void remove(Address address);
+    void remove(Address address) throws SQLException;
 }
