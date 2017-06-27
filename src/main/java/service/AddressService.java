@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class AddressService extends Util implements AddressDao{
 
-    Connection connection = getConnection();
+   private Connection connection = getConnection();
 
     public void add(Address address) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -44,7 +44,7 @@ public class AddressService extends Util implements AddressDao{
 
         List<Address> addressList = new ArrayList<Address>();
 
-        String sql = "SELECT ID, COUNTRY, CITY, STREET, POST_CODE";
+        String sql = "SELECT ID, COUNTRY, CITY, STREET, POST_CODE FROM ADDRESS";
 
         Statement statement = null;
         try {
