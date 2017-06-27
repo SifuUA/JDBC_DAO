@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hibernate_dao@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="hibernate_dao">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="db_1"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="spring_security_app"/>
+    <schema id="8" parent="1" name="spring_security_application"/>
+    <schema id="9" parent="1" name="test"/>
+    <table id="10" parent="2" name="address"/>
+    <table id="11" parent="2" name="empl_proj"/>
+    <table id="12" parent="2" name="employee"/>
+    <table id="13" parent="2" name="project"/>
+    <column id="14" parent="10" name="ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="15" parent="10" name="COUNTRY">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="10" name="CITY">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="10" name="STREET">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="10" name="POST_CODE">
+      <Position>5</Position>
+      <DataType>varchar(15)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="19" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="20" parent="11" name="EMPLOYEE_ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="21" parent="11" name="PROJECT_ID">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="22" parent="11" name="EMPLOYEE_ID">
+      <ColNames>EMPLOYEE_ID</ColNames>
+    </index>
+    <index id="23" parent="11" name="PROJECT_ID">
+      <ColNames>PROJECT_ID</ColNames>
+    </index>
+    <foreign-key id="24" parent="11" name="empl_proj_ibfk_1">
+      <ColNames>EMPLOYEE_ID</ColNames>
+      <RefSchemaName>hibernate_dao</RefSchemaName>
+      <RefTableName>employee</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="25" parent="11" name="empl_proj_ibfk_2">
+      <ColNames>PROJECT_ID</ColNames>
+      <RefSchemaName>hibernate_dao</RefSchemaName>
+      <RefTableName>project</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="26" parent="12" name="ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="27" parent="12" name="FIRST_NAME">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="12" name="LAST_NAME">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="12" name="BIRTHDAY">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="12" name="ADDRESS_ID">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="31" parent="12" name="ADDRESS_ID">
+      <ColNames>ADDRESS_ID</ColNames>
+    </index>
+    <key id="32" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="33" parent="12" name="employee_ibfk_1">
+      <ColNames>ADDRESS_ID</ColNames>
+      <RefSchemaName>hibernate_dao</RefSchemaName>
+      <RefTableName>address</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="34" parent="13" name="ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="13" name="TITLE">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="36" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
