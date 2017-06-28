@@ -72,25 +72,80 @@ public class EmployeeService extends Util implements EmployeeDao {
         return employeeList;
     }
 
-    public Employee getById(Long id) {
+    public Employee getById(Long id) throws SQLException {
         PreparedStatement preparedStatement = null;
 
         String sql = "SELECT ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID FROM EMPLOYEE WHERE ID=?";
 
+        Employee employee = new Employee();
+
         try {
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            employee.setId(resultSet.getLong("ID"));
+            employee.setFirstName(resultSet.getString("FIRST_NAME"));
+            employee.setLastName(resultSet.getString("LAST_NAME"));
+            employee.setBirthday(resultSet.getDate("BIRTHDAY"));
+            employee.setAdressId(resultSet.getLong("ADDRESS_ID"));
+
+            preparedStatement.executeUpdate();
         }catch (SQLException e)
         {
             e.printStackTrace();
+        }finally {
+            if (preparedStatement != null)
+                preparedStatement.close();
+            if (connection != null)
+                connection.close();
         }
-        return null;
+        return employee;
     }
 
-    public void update(Employee employee) {
+    public void update(Employee employee) throws SQLException {
+        PreparedStatement preparedStatement = null;
 
+        String sql = "UPDATE EMPLOYEE SET FIRST_NAME=?, LAST_NAME=?, BIRTHDAY=?, ADDRESS_ID=? WHERE id=?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, employee.getFirstName());
+            preparedStatement.setString(2, employee.getLastName());
+            preparedStatement.setDate(3, employee.getBirthday());
+            preparedStatement.setLong(4, employee.getAdressId());
+
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            if (preparedStatement != null)
+                preparedStatement.close();
+            if (connection != null)
+                connection.close();
+        }
     }
 
-    public void delete(Employee employee) {
+    public void delete(Employee employee) throws SQLException {
+        PreparedStatement preparedStatement = null;
 
+        String sql = "DELETE FROM EMPLOYEE WHERE ID=?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setLong(1, employee.getId());
+
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            if (preparedStatement != null)
+                preparedStatement.close();
+            if (connection != null)
+                connection.close();
+        }
     }
 }

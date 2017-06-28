@@ -14,9 +14,9 @@ public interface EmployeeDao {
 
     List<Employee> getAll() throws SQLException;
 
-    Employee getById(Long id);
+    Employee getById(Long id) throws SQLException;
 
-    void update(Employee employee);
+    void update(Employee employee) throws SQLException;
 
-    void delete(Employee employee);
+    void delete(Employee employee) throws SQLException;
 }

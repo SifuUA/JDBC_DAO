@@ -21,7 +21,7 @@ public interface AddressDao {
     Address getById(Long id) throws SQLException;
 
     //update
-    void update(Address address);
+    void update(Address address) throws SQLException;
 
     //delete
     void remove(Address address) throws SQLException;

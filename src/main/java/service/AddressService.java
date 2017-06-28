@@ -106,7 +106,7 @@ public class AddressService extends Util implements AddressDao{
         return address;
     }
 
-    public void update(Address address) {
+    public void update(Address address) throws SQLException {
         PreparedStatement preparedStatement = null;
 
         String sql = "UPDATE ADDRESS SET COUNTRY=?, CITY=?, STREET=?, POST_CODE=? WHERE id=?";
@@ -123,6 +123,11 @@ public class AddressService extends Util implements AddressDao{
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
+        }finally {
+            if (preparedStatement != null)
+                preparedStatement.close();
+            if (connection != null)
+                connection.close();
         }
     }
 
