@@ -2,6 +2,7 @@ package dao;
 
 import entity.EmplProj;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -9,15 +10,15 @@ import java.util.List;
  */
 public interface EmplProjDao {
 
-    void add(EmplProj emplProj);
+    void add(EmplProj emplProj) throws SQLException;
 
-    List<EmplProj> getAll();
+    List<EmplProj> getAll() throws SQLException;
 
-    EmplProj getVyEmplIdAndProjId(Long employeeeId, Long projectId);
+    EmplProj getByEmplIdAndProjId(Long employeeeId, Long projectId) throws SQLException;
 
-    void update(EmplProj emplProj);
+    void update(EmplProj emplProj) throws SQLException;
 
-    void delete(EmplProj emplProj);
+    void delete(EmplProj emplProj) throws SQLException;
 
 
 }
