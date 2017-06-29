@@ -1,5 +1,6 @@
 package service;
 
+import businessLogic.Util;
 import dao.ProjectDao;
 import entity.Project;
 
@@ -10,9 +11,9 @@ import java.util.List;
 /**
  * Created by Alex on 28.06.2017.
  */
-public class ProjectService extends Project implements ProjectDao {
+public class ProjectService extends Util implements ProjectDao {
 
-    private Connection connection = null;
+    private Connection connection = getConnection();
 
     public void add(Project project) throws SQLException {
 
